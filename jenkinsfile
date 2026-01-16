@@ -1,0 +1,71 @@
+// Reusable Jenkins Pipeline
+// Only change environment values when reusing this pipeline
+
+pipeline {
+    agent any
+
+    // Environment variables
+    environment {
+        PATH = "$PATH:/usr/bin/"
+
+        // Credentials from Jenkins global credentials
+        DOCKER_HUB_TOKEN = credentials("docker_hub_token")
+
+        // Git repository URL
+        GIT_REPO_URL = "https://github.com/Sachinn-9700/Debops-jenkins-demo/"
+
+        // Docker image name 
+        
+        DOCKER_IMAGE_NAME = 'sachinn9700/myapp:v3'
+    }
+
+    stages {
+
+        stage('Checkout Source Code') {
+            steps {
+                echo 'Pulling code from GitHub repository'
+                git branch: 'main', url: "${GIT_REPO_URL}"
+            }
+        }
+
+        stage('Build Application') {
+            steps {
+                echo 'Building the application'
+            }
+        }
+
+        stage('Test Application') {
+            steps {
+                echo 'Running tests'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                echo 'Building Docker image'
+                sh "docker build -t ${DOCKER_IMAGE_NAME} ."
+            }
+        }
+
+        stage('Docker Hub Login') {
+            steps {
+                echo 'Logging in to Docker Hub'
+                 sh 'echo "$DOCKER_HUB_TOKEN" | docker login -u sachinn9700 --password-stdin'
+            }
+        }
+
+        stage('Push Image to Docker Hub') {
+            steps {
+                echo 'Pushing Docker image to Docker Hub'
+                sh "docker push ${DOCKER_IMAGE_NAME}"
+            }
+        }
+
+        stage('Update Docker Service') {
+            steps {
+                echo 'Updating Docker service'
+                sh "docker service update --force --image ${DOCKER_IMAGE_NAME} myapp"
+            }
+        }
+    }
+}
