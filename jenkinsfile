@@ -12,7 +12,7 @@ pipeline {
         DOCKER_HUB_TOKEN = credentials("docker_hub_token")
 
         // Git repository URL
-        GIT_REPO_URL = "https://github.com/Sachinn-9700/Debops-jenkins-demo/"
+        GIT_REPO_URL = "https://github.com/Sachinn-9700/Debops-jenkins-demo"
 
         // Docker image name 
         
