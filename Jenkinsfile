@@ -6,39 +6,20 @@ pipeline {
 
     // Environment variables
     environment {
-        PATH = "$PATH:/usr/bin/"
+        PATH = "$PATH:/usr/local/bin/"
 
         // Credentials from Jenkins global credentials
         DOCKER_HUB_TOKEN = credentials("docker_hub_token")
 
         // Git repository URL
-        GIT_REPO_URL = "https://github.com/Sachinn-9700/Debops-jenkins-demo"
+        GIT_REPO_URL = "https://github.com/Sachinn-9700/Debops-jenkins-demo/"
 
         // Docker image name 
         
-        DOCKER_IMAGE_NAME = 'sachinn9700/myapp:v3'
+        DOCKER_IMAGE_NAME = 'sachinn9700/myapp:v4'
     }
 
     stages {
-
-        stage('Checkout Source Code') {
-            steps {
-                echo 'Pulling code from GitHub repository'
-                git branch: 'main', url: "${GIT_REPO_URL}"
-            }
-        }
-
-        stage('Build Application') {
-            steps {
-                echo 'Building the application'
-            }
-        }
-
-        stage('Test Application') {
-            steps {
-                echo 'Running tests'
-            }
-        }
 
         stage('Build Docker Image') {
             steps {
@@ -61,10 +42,10 @@ pipeline {
             }
         }
 
-        stage('Update Docker Service') {
+        stage('updating deployment') {
             steps {
-                echo 'Updating Docker service'
-                sh "docker service update --force --image ${DOCKER_IMAGE_NAME} myapp"
+                echo 'deploying website throught k8'
+                sh "kubeclt apply -f deployment.yaml"
             }
         }
     }
