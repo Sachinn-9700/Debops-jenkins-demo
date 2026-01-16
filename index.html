@@ -1,124 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>🚀 Jenkins Has Deployed This!</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-    body {
-        margin: 0;
-        font-family: 'Comic Sans MS', cursive, sans-serif;
-        background: radial-gradient(circle at top, #111, #000);
-        color: #00ff9c;
-        overflow: hidden;
-    }
+    <meta charset="UTF-8">
+    <title>Jenkins Reusable Pipeline</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
-    .center {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-    }
+        .container {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
 
-    h1 {
-        font-size: 3rem;
-        animation: glitch 1.5s infinite;
-    }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
 
-    @keyframes glitch {
-        0% { text-shadow: 2px 2px #ff00ff; }
-        50% { text-shadow: -2px -2px #00ffff; }
-        100% { text-shadow: 2px -2px #ff0000; }
-    }
+        p {
+            font-size: 1.1rem;
+            margin: 8px 0;
+        }
 
-    button {
-        padding: 15px 30px;
-        font-size: 1.2rem;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        background: #00ff9c;
-        color: #000;
-        margin-top: 20px;
-        transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    button:hover {
-        transform: scale(1.1) rotate(-2deg);
-        box-shadow: 0 0 20px #00ff9c;
-    }
-
-    .floating {
-        position: absolute;
-        font-size: 2rem;
-        opacity: 0.8;
-        animation: float 10s linear infinite;
-    }
-
-    @keyframes float {
-        from { transform: translateY(110vh) rotate(0deg); }
-        to { transform: translateY(-10vh) rotate(360deg); }
-    }
-
-    #status {
-        margin-top: 15px;
-        font-size: 1.1rem;
-        color: #fff;
-    }
-</style>
+        .footer {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+    </style>
 </head>
 <body>
 
-<div class="center">
-    <h1>🤖 JENKINS DID A THING</h1>
-    <p>Congratulations. Your pipeline didn’t break.  
-       <br>That alone is suspicious.</p>
-
-    <button onclick="doChaos()">Click for Absolutely No Reason</button>
-    <div id="status"></div>
-</div>
-
-<script>
-    console.log("🚨 WARNING: This site was deployed by Jenkins.");
-    console.log("🤡 If it works, it was an accident.");
-
-    const messages = [
-        "✅ Build Successful (somehow)",
-        "⚠️ Deployed on localhost. The safest place.",
-        "🔥 No tests were harmed in this deployment",
-        "🧪 Tests skipped. Confidence increased.",
-        "🐛 Bug-free (we didn’t look)",
-        "💀 Jenkins is watching you"
-    ];
-
-    function doChaos() {
-        document.body.style.background =
-            `radial-gradient(circle at ${Math.random()*100}% ${Math.random()*100}%, #222, #000)`;
-
-        const msg = messages[Math.floor(Math.random() * messages.length)];
-        document.getElementById("status").innerText = msg;
-
-        spawnEmoji();
-    }
-
-    function spawnEmoji() {
-        const emojis = ["🚀","🤖","🔥","💥","🧪","😎","☕","🐧"];
-        const e = document.createElement("div");
-        e.className = "floating";
-        e.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-        e.style.left = Math.random() * 100 + "vw";
-        e.style.animationDuration = (5 + Math.random() * 10) + "s";
-        document.body.appendChild(e);
-
-        setTimeout(() => e.remove(), 15000);
-    }
-
-    // surprise auto chaos
-    setInterval(() => {
-        if (Math.random() > 0.7) spawnEmoji();
-    }, 1000);
-</script>
+    <div class="container">
+        <h1>🚀 Jenkins Pipeline Deployment</h1>
+        <p>This website is deployed using a</p>
+        <p><strong>Reusable Jenkins Pipeline + Docker</strong></p>
+        <p class="footer">Powered by CI/CD</p>
+    </div>
 
 </body>
 </html>
