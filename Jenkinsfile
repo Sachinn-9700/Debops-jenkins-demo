@@ -45,7 +45,7 @@ pipeline {
         stage('updating deployment') {
             steps {
                 echo 'deploying website throught k8'
-                sh "minikube kubectl -- apply -f deployment.yaml"
+                sh "kubectl -- apply -f deployment.yaml"
             }
         }
     }
